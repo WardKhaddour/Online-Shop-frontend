@@ -154,7 +154,8 @@ main {
 
 .form-control input:focus,
 .form-control textarea:focus {
-  outline-color: #00695c;
+  outline: none;
+  border: 3px solid #00695c;
 }
 
 .loading-spinner {
