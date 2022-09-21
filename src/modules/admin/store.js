@@ -1,38 +1,38 @@
-import ShopService from "./service";
+import AdminService from "./service";
 
 export default {
   namespaced: true,
   state: {
-    products: [],
-    loading: false
+    loading: false,
+    success: false
   },
   getters: {
     loading(state) {
       return state.loading;
     },
-    products(state) {
-      return state.products;
+    success(state) {
+      return state.success;
     }
   },
   mutations: {
     setLoading(state, value) {
       state.loading = value;
     },
-    setProducts(state, value) {
-      state.products = value;
+    setSuccessStatus(state, value) {
+      state.success = value;
     }
   },
   actions: {
-    async fetchProducts({ commit }) {
+    async postProduct({ commit }, product) {
       commit("setLoading", true);
       try {
-        const products = (await ShopService.fetchProducts()).data;
-        commit("setProducts", products);
-        console.log(products);
+        await AdminService.postProduct(product);
         commit("setLoading", false);
+        commit("setSuccessStatus", true);
       } catch (err) {
         console.log(err);
         commit("setLoading", false);
+        commit("setSuccessStatus", false);
       }
     }
   }
