@@ -1,15 +1,25 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Vue from "vue";
+import Router from "vue-router";
+import MainLayout from "@/layouts/MainLayout";
+import ShopModuleRoutes from "@/modules/shop/routes";
 
-Vue.use(Router)
+Vue.use(Router);
 
-export default new Router({
+const router = new Router({
+  mode: "history",
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: "/",
+      component: MainLayout,
+      children: [ShopModuleRoutes]
     }
   ]
-})
+});
+
+router.afterEach((to, from) => {
+  Vue.nextTick(() => {
+    document.title = to.meta.title || "Shop";
+  });
+});
+
+export default router;
