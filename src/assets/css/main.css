@@ -212,3 +212,12 @@ form {
   left: 50%;
   top: 50%;
 }
+
+.link {
+  text-decoration: none;
+  padding: 3px 15px;
+  color: #00695c;
+}
+.link:hover {
+  color: white;
+}
