@@ -5,6 +5,8 @@ import App from "./App";
 import router from "./router";
 import store from "./store";
 import "@/assets/css/main.css";
+import "@/assets/css/forms.css";
+import "@/assets/css/products.css";
 
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
