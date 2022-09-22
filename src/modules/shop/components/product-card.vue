@@ -1,23 +1,48 @@
 <template>
-  <article class="card product-item">
-    <header class="card__header">
-      <h1 class="product__title">{{ product.title }}</h1>
-    </header>
-    <div class="card__image">
-      <img :src="product.imageUrl" :alt="product.title" />
-    </div>
-    <div class="card__content">
-      <h2 class="product__price">{{ product.price }}</h2>
-      <p class="product__description">{{ product.description }}</p>
-    </div>
-    <div class="card__actions">
-      <button class="btn">Add to Cart</button>
-    </div>
-  </article>
+  <div>
+    <article class="card product-item" v-if="!loading">
+      <header class="card__header">
+        <h1 class="product__title">{{ product.title }}</h1>
+      </header>
+      <div class="card__image">
+        <img :src="product.imageUrl" :alt="product.title" />
+      </div>
+      <div class="card__content">
+        <h2 class="product__price">{{ product.price }}</h2>
+        <p class="product__description">{{ product.description }}</p>
+      </div>
+      <div class="card__actions">
+        <button class="btn" @click="viewProductDetails">Details</button>
+        <button class="btn" @click="addProductToCart">Add to Cart</button>
+      </div>
+    </article>
+    <loading-spinner v-if="loading"></loading-spinner>
+  </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+import RingLoader from "vue-spinner/src/RingLoader.vue";
+
 export default {
-  props: { product: { type: Object, required: true } }
+  props: { product: { type: Object, required: true } },
+  components: {
+    loadingSpinner: RingLoader
+  },
+  computed: {
+    ...mapGetters("Shop", ["loading"])
+  },
+  methods: {
+    ...mapActions("Shop", ["addToCart"]),
+    async addProductToCart() {
+      await this.addToCart(this.product.id);
+    },
+    viewProductDetails() {
+      console.log(this.product.id);
+      this.$router.push({
+        path: `/details/${this.product.id}`
+      });
+    }
+  }
 };
 </script>

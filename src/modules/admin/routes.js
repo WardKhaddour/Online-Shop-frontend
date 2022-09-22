@@ -9,6 +9,11 @@ export default {
       path: "add-product",
       component: () => import("./pages/add-product"),
       meta: { title: "Add Product" }
+    },
+    {
+      path: "products",
+      component: () => import("./pages/products"),
+      meta: { title: "Products" }
     }
   ]
 };

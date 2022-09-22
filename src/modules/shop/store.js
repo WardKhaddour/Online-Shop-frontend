@@ -4,7 +4,8 @@ export default {
   namespaced: true,
   state: {
     products: [],
-    loading: false
+    product: {},
+    loading: true
   },
   getters: {
     loading(state) {
@@ -12,6 +13,9 @@ export default {
     },
     products(state) {
       return state.products;
+    },
+    product(state) {
+      return state.product;
     }
   },
   mutations: {
@@ -20,6 +24,9 @@ export default {
     },
     setProducts(state, value) {
       state.products = value;
+    },
+    setProduct(state, value) {
+      state.product = value;
     }
   },
   actions: {
@@ -29,6 +36,29 @@ export default {
         const products = (await ShopService.fetchProducts()).data;
         commit("setProducts", products);
         console.log(products);
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
+    },
+    async getProductById({ commit }, id) {
+      commit("setLoading", true);
+      try {
+        const product = (await ShopService.getProductById(id)).data;
+        commit("setProduct", product);
+        console.log(product);
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
+    },
+    async addToCart({ commit }, id) {
+      commit("setLoading", true);
+      try {
+        await ShopService.addToCart({ productId: id });
+        console.log(id);
         commit("setLoading", false);
       } catch (err) {
         console.log(err);

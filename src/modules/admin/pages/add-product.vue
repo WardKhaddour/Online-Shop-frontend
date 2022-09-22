@@ -70,6 +70,7 @@ export default {
         this.imageUrl = "";
         this.price = "";
         this.description = "";
+        this.$router.push("/shop");
       }
     }
   }
