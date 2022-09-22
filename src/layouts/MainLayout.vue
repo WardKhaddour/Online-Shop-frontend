@@ -33,45 +33,46 @@ export default {
       navItems: [
         {
           label: "Shop",
-          link: "/shop",
-          active: ""
+          link: "/shop"
         },
         {
           label: "Products",
-          link: "/products",
-          active: ""
+          link: "/products"
         },
         {
           label: "Cart",
-          link: "/cart",
-          active: ""
+          link: "/cart"
         },
         {
           label: "Orders",
-          link: "/orders",
-          active: ""
+          link: "/orders"
         },
         {
           label: "Add Product",
-          link: "/admin/add-product",
-          active: ""
+          link: "/admin/add-product"
         },
         {
-          label: "Admin Product",
-          link: "/admin/products",
-          active: ""
+          label: "Admin Products",
+          link: "/admin/products"
         }
       ],
       currentPage: "Shop"
     };
   },
+  created() {
+    this.setActiveItem();
+  },
   watch: {
     $route: {
       handler() {
-        this.currentPage = document.title;
+        this.setActiveItem();
       }
     }
   },
-  methods: {}
+  methods: {
+    setActiveItem() {
+      this.currentPage = this.$route.name;
+    }
+  }
 };
 </script>

@@ -22,10 +22,11 @@ const router = new Router({
   ]
 });
 
-router.afterEach((to, from) => {
-  Vue.nextTick(() => {
-    document.title = to.meta.title || "Shop";
-  });
-});
+// router.afterEach((to, from) => {
+// Vue.nextTick(() => {
+// console.log($router);
+// document.title = router.name;
+// });
+// });
 
 export default router;

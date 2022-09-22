@@ -23,7 +23,6 @@ import RingLoader from "vue-spinner/src/RingLoader.vue";
 export default {
   async created() {
     await this.fetchProducts();
-    console.log(this.products);
   },
   components: {
     productCard,

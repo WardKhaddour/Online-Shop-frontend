@@ -15,8 +15,7 @@ import productCard from '../components/product-card.vue'
 
 export default {
    async created() {
-    await this.fetchProducts()
-    console.log(this.products);
+    await this.fetchProducts();
   },
   components:{
     productCard

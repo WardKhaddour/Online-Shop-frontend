@@ -38,7 +38,6 @@ export default {
       await this.addToCart(this.product.id);
     },
     viewProductDetails() {
-      console.log(this.product.id);
       this.$router.push({
         path: `/details/${this.product.id}`
       });

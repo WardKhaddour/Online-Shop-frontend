@@ -6,21 +6,25 @@ export default {
   redirect: "shop",
   children: [
     {
+      name: "Shop",
       path: "shop",
       component: () => import("./pages/index.vue"),
       meta: { title: "Shop" }
     },
     {
+      name: "Products",
       path: "products",
       component: () => import("./pages/product-list.vue"),
       meta: { title: "Products" }
     },
     {
+      name: "Cart",
       path: "cart",
       component: () => import("./pages/cart.vue"),
       meta: { title: "Cart" }
     },
     {
+      name: "Details",
       path: "details/:id",
       component: () => import("./pages/product-details.vue"),
       meta: { title: "Details" }

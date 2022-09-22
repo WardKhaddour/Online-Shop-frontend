@@ -15,7 +15,6 @@ export default class Service {
   }
 
   static addToCart(qp = {}) {
-    console.log(qp);
     return unauthenticatedAxiosInstance
       .post(ep.ADD_TO_CART, qp)
       .then(res => res.data);

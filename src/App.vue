@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  watch: {
+    $route() {
+      document.title = this.$route.name;
+    }
+  }
 };
 </script>
 
