@@ -30,7 +30,7 @@
           ></textarea>
         </div>
 
-        <button class="btn" type="submit">Add Product</button>
+        <button class="btn" type="submit">{{ buttonLabel }}</button>
       </form>
     </main>
     <loading-spinner v-if="loading" class="loading-spinner"></loading-spinner>
@@ -42,13 +42,33 @@ import { mapActions, mapGetters } from "vuex";
 import RingLoader from "vue-spinner/src/RingLoader.vue";
 
 export default {
+  props: {
+    product: {
+      type: Object,
+      required: false,
+      default: () => {}
+    }
+  },
   data() {
     return {
       title: "",
       imageUrl: "",
       price: "",
-      description: ""
+      description: "",
+      buttonLabel: "Add Product"
     };
+  },
+  created() {
+    if (this.product) {
+      this.id = this.product.id;
+      this.title = this.product.title;
+      this.imageUrl = this.product.imageUrl;
+      this.price = this.product.price;
+      this.description = this.product.description;
+      this.buttonLabel = "Update Product";
+    } else {
+      this.$router.push("/");
+    }
   },
   components: {
     loadingSpinner: RingLoader
@@ -57,14 +77,24 @@ export default {
     ...mapGetters("Admin", ["loading", "success"])
   },
   methods: {
-    ...mapActions("Admin", ["postProduct"]),
+    ...mapActions("Admin", ["postProduct", "editProduct"]),
     async submitHandler() {
-      await this.postProduct({
-        title: this.title,
-        imageUrl: this.imageUrl,
-        price: this.price,
-        description: this.description
-      });
+      if (this.product) {
+        await this.editProduct({
+          id: this.id,
+          title: this.title,
+          imageUrl: this.imageUrl,
+          price: this.price,
+          description: this.description
+        });
+      } else {
+        await this.postProduct({
+          title: this.title,
+          imageUrl: this.imageUrl,
+          price: this.price,
+          description: this.description
+        });
+      }
       if (this.success) {
         this.title = "";
         this.imageUrl = "";

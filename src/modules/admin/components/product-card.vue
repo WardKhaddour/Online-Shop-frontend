@@ -11,7 +11,14 @@
       <p class="product__description">{{ product.description }}</p>
     </div>
     <div class="card__actions">
-      <button class="btn">Edit</button>
+      <router-link
+        class="btn link"
+        :to="{
+          name: 'Edit Product',
+          params: { product: product }
+        }"
+        >Edit</router-link
+      >
       <button class="btn">Delete</button>
     </div>
   </article>
@@ -20,5 +27,10 @@
 <script>
 export default {
   props: { product: { type: Object, required: true } }
+  //   methods: {
+  //     navigateToEdit() {
+  //       this.$router.push("/add-product", this.product);
+  //     }
+  //   }
 };
 </script>

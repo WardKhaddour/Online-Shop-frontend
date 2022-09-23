@@ -34,6 +34,19 @@ export default {
         commit("setLoading", false);
         commit("setSuccessStatus", false);
       }
+    },
+
+    async editProduct({ commit }, product) {
+      commit("setLoading", true);
+      try {
+        await AdminService.editProduct(product);
+        commit("setLoading", false);
+        commit("setSuccessStatus", true);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+        commit("setSuccessStatus", false);
+      }
     }
   }
 };

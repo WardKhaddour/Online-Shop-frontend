@@ -8,8 +8,15 @@ export default {
     {
       name: "Add Product",
       path: "add-product",
-      component: () => import("./pages/add-product"),
+      component: () => import("./pages/edit-product"),
       meta: { title: "Add Product" }
+    },
+    {
+      name: "Edit Product",
+      path: "edit-product",
+      component: () => import("./pages/edit-product"),
+      props: true,
+      meta: { title: "Edit Product" }
     },
     {
       name: "Admin Products",

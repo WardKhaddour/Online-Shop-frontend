@@ -7,4 +7,10 @@ export default class Service {
       return res.data;
     });
   }
+
+  static editProduct(qp = {}) {
+    return unauthenticatedAxiosInstance.post(ep.EDIT_PRODUCT, qp).then(res => {
+      return res.data;
+    });
+  }
 }
