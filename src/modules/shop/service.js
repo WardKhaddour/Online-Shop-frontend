@@ -19,4 +19,9 @@ export default class Service {
       .post(ep.ADD_TO_CART, qp)
       .then(res => res.data);
   }
+  static getCart(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .get(ep.GET_CART, qp)
+      .then(res => res.data);
+  }
 }
