@@ -33,8 +33,6 @@ export default {
   },
   async created() {
     await this.getProductById(this.$route.params.id);
-  },
-  mounted() {
     document.title = this.product.title;
   }
 };
