@@ -19,18 +19,22 @@
         }"
         >Edit</router-link
       >
-      <button class="btn">Delete</button>
+      <button class="btn" @click="deleteProd">Delete</button>
     </div>
   </article>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
-  props: { product: { type: Object, required: true } }
-  //   methods: {
-  //     navigateToEdit() {
-  //       this.$router.push("/add-product", this.product);
-  //     }
-  //   }
+  props: { product: { type: Object, required: true } },
+  methods: {
+    ...mapActions("Admin", ["deleteProduct"]),
+    deleteProd() {
+      console.log("DELETING");
+      this.deleteProduct(this.product.id);
+    }
+  }
 };
 </script>

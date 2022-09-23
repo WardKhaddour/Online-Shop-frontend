@@ -67,7 +67,7 @@ export default {
       this.description = this.product.description;
       this.buttonLabel = "Update Product";
     } else {
-      this.$router.push("/");
+      // this.$router.push("/");
     }
   },
   components: {

@@ -47,6 +47,20 @@ export default {
         commit("setLoading", false);
         commit("setSuccessStatus", false);
       }
+    },
+
+    async deleteProduct({ commit, dispatch }, id) {
+      commit("setLoading", true);
+      try {
+        await AdminService.deleteProduct({ id });
+        commit("setLoading", false);
+        commit("setSuccessStatus", true);
+        dispatch("Shop/fetchProducts", {}, { root: true });
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+        commit("setSuccessStatus", false);
+      }
     }
   }
 };
