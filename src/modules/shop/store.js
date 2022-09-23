@@ -79,6 +79,17 @@ export default {
         console.log(err);
         commit("setLoading", false);
       }
+    },
+    async deleteFromCart({ commit, dispatch }, id) {
+      commit("setLoading", true);
+      try {
+        await ShopService.deleteFromCart({ id });
+        dispatch("getCart");
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
     }
   }
 };

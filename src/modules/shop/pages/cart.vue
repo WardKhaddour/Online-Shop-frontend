@@ -3,7 +3,10 @@
     <main v-if="cart.length">
       <ul>
         <li v-for="product in cart" :key="product.productData.id">
-          {{ product.productData.title }} ({{ product.qty }})
+          <p>{{ product.productData.title }} ({{ product.qty }})</p>
+          <button class="btn" @click="deleteFromCart(product.id)">
+            Delete
+          </button>
         </li>
       </ul>
     </main>
@@ -24,7 +27,7 @@ export default {
     ...mapGetters("Shop", ["cart", "loading"])
   },
   methods: {
-    ...mapActions("Shop", ["getCart"])
+    ...mapActions("Shop", ["getCart", "deleteFromCart"])
   },
   async created() {
     await this.getCart();

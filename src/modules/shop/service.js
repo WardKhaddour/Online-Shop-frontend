@@ -24,4 +24,9 @@ export default class Service {
       .get(ep.GET_CART, qp)
       .then(res => res.data);
   }
+  static deleteFromCart(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .post(ep.DELETE_FROM_CART, qp)
+      .then(res => res.data);
+  }
 }
