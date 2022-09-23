@@ -80,7 +80,7 @@ export default {
         commit("setLoading", false);
       }
     },
-    async deleteFromCart({ commit, dispatch }, id) {
+    async removeFromCart({ commit, dispatch }, id) {
       commit("setLoading", true);
       try {
         await ShopService.deleteFromCart({ id });
