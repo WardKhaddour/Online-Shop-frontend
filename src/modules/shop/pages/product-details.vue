@@ -3,7 +3,7 @@
     <main class="centered" v-if="!loading">
       <h1>{{ product.title }}</h1>
       <hr />
-      <div>
+      <div class="image">
         <img :src="product.imageUrl" :alt="product.title" />
       </div>
       <h2>{{ product.price }}</h2>
