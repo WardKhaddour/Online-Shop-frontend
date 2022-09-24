@@ -2,6 +2,11 @@ import { unauthenticatedAxiosInstance } from "@/utils/axios";
 import * as ep from "./endpoints";
 
 export default class Service {
+  static fetchProducts(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .get(ep.ADMIN_PRODUCTS, qp)
+      .then(res => res.data);
+  }
   static postProduct(qp = {}) {
     return unauthenticatedAxiosInstance
       .post(ep.POST_PRODUCT, qp)

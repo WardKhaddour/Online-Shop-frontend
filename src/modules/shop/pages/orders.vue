@@ -2,11 +2,11 @@
   <div v-if="!loading">
     <main v-if="orders.length">
       <ul>
-        <li v-for="order in orders" :key="order.id">
-          <h1># {{ order.id }}</h1>
+        <li v-for="order in orders" :key="order._id">
+          <h1># {{ order._id }}</h1>
           <ul>
-            <li v-for="product in order.products" :key="product.title">
-              {{ product.title }} ({{ product.orderItem.quantity }})
+            <li v-for="product in order.items" :key="product.title">
+              {{ product.title }} ({{ product.quantity }})
             </li>
           </ul>
         </li>

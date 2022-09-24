@@ -3,12 +3,16 @@ import AdminService from "./service";
 export default {
   namespaced: true,
   state: {
+    products: [],
     loading: false,
     success: false
   },
   getters: {
     loading(state) {
       return state.loading;
+    },
+    products(state) {
+      return state.products;
     },
     success(state) {
       return state.success;
@@ -18,11 +22,25 @@ export default {
     setLoading(state, value) {
       state.loading = value;
     },
+    setProducts(state, value) {
+      state.products = value;
+    },
     setSuccessStatus(state, value) {
       state.success = value;
     }
   },
   actions: {
+    async fetchAdminProducts({ commit }) {
+      commit("setLoading", true);
+      try {
+        const products = (await AdminService.fetchProducts()).data;
+        commit("setProducts", products);
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
+    },
     async postProduct({ commit }, product) {
       commit("setLoading", true);
       try {
@@ -55,7 +73,7 @@ export default {
         await AdminService.deleteProduct({ id });
         commit("setLoading", false);
         commit("setSuccessStatus", true);
-        dispatch("Shop/fetchProducts", {}, { root: true });
+        dispatch("fetchAdminProducts");
       } catch (err) {
         console.log(err);
         commit("setLoading", false);

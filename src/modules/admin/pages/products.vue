@@ -20,17 +20,17 @@ import RingLoader from "vue-spinner/src/RingLoader";
 
 export default {
   async created() {
-    await this.fetchProducts();
+    await this.fetchAdminProducts();
   },
   components: {
     productCard,
-   loadingSpinner: RingLoader
+    loadingSpinner: RingLoader
   },
   methods: {
-    ...mapActions("Shop", ["fetchProducts"])
+    ...mapActions("Admin", ["fetchAdminProducts"])
   },
   computed: {
-    ...mapGetters("Shop", ["products", "loading"])
+    ...mapGetters("Admin", ["products", "loading"])
   }
 };
 </script>

@@ -60,7 +60,7 @@ export default {
   },
   created() {
     if (this.product) {
-      this.id = this.product.id;
+      this.id = this.product._id;
       this.title = this.product.title;
       this.imageUrl = this.product.imageUrl;
       this.price = this.product.price;

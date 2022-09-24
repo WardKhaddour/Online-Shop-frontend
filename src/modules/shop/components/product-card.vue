@@ -35,11 +35,12 @@ export default {
   methods: {
     ...mapActions("Shop", ["addToCart"]),
     async addProductToCart() {
-      await this.addToCart(this.product.id);
+      await this.addToCart(this.product._id);
+      this.$router.push("/cart");
     },
     viewProductDetails() {
       this.$router.push({
-        path: `/details/${this.product.id}`
+        path: `/details/${this.product._id}`
       });
     }
   }

@@ -4,8 +4,8 @@
       <ul class="cart__item-list">
         <li class="cart__item" v-for="product in cart" :key="product.id">
           <h1>{{ product.title }}</h1>
-          <h2>Quantity: {{ product.cartItem.quantity }}</h2>
-          <button class="btn danger" @click="removeFromCart(product.id)">
+          <h2>Quantity: {{ product.quantity }}</h2>
+          <button class="btn danger" @click="removeFromCart(product._id)">
             Delete
           </button>
         </li>

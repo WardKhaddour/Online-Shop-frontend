@@ -31,9 +31,8 @@ export default {
   props: { product: { type: Object, required: true } },
   methods: {
     ...mapActions("Admin", ["deleteProduct"]),
-    deleteProd() {
-      console.log("DELETING");
-      this.deleteProduct(this.product.id);
+    async deleteProd() {
+      await this.deleteProduct(this.product._id);
     }
   }
 };
