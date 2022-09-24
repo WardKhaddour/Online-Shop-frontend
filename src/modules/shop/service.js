@@ -29,4 +29,15 @@ export default class Service {
       .post(ep.DELETE_FROM_CART, qp)
       .then(res => res.data);
   }
+  static postOrder(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .post(ep.SEND_ORDER, qp)
+      .then(res => res.data);
+  }
+
+  static getOrders(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .get(ep.GET_ORDERS, qp)
+      .then(res => res.data);
+  }
 }

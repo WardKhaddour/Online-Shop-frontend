@@ -10,6 +10,10 @@
           </button>
         </li>
       </ul>
+      <hr />
+      <div class="centered">
+        <button class="btn" @click="order">Order Now!</button>
+      </div>
     </main>
     <h1 v-if="!cart.length">
       No Products in Cart!
@@ -25,10 +29,16 @@ import RingLoader from "vue-spinner/src/RingLoader";
 export default {
   components: { loadingSpinner: RingLoader },
   computed: {
-    ...mapGetters("Shop", ["cart", "loading"])
+    ...mapGetters("Shop", ["cart", "loading", "success"])
   },
   methods: {
-    ...mapActions("Shop", ["getCart", "removeFromCart"])
+    ...mapActions("Shop", ["getCart", "removeFromCart", "postOrder"]),
+    async order() {
+      await this.postOrder();
+      if (this.success) {
+        this.$router.push("/orders");
+      }
+    }
   },
   async created() {
     await this.getCart();

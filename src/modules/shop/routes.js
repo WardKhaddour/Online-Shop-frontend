@@ -24,6 +24,12 @@ export default {
       meta: { title: "Cart" }
     },
     {
+      name: "Orders",
+      path: "orders",
+      component: () => import("./pages/orders.vue"),
+      meta: { title: "Orders" }
+    },
+    {
       name: "Details",
       path: "details/:id",
       component: () => import("./pages/product-details.vue"),

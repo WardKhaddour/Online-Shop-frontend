@@ -6,7 +6,9 @@ export default {
     products: [],
     product: {},
     cart: [],
-    loading: true
+    orders: [],
+    loading: true,
+    success: false
   },
   getters: {
     loading(state) {
@@ -20,6 +22,12 @@ export default {
     },
     cart(state) {
       return state.cart;
+    },
+    orders(state) {
+      return state.orders;
+    },
+    success(state) {
+      return state.success;
     }
   },
   mutations: {
@@ -34,6 +42,12 @@ export default {
     },
     setCart(state, value) {
       state.cart = value;
+    },
+    setOrders(state, value) {
+      state.orders = value;
+    },
+    setSuccess(state, value) {
+      state.success = value;
     }
   },
   actions: {
@@ -85,6 +99,29 @@ export default {
       try {
         await ShopService.deleteFromCart({ id });
         dispatch("getCart");
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
+    },
+    async postOrder({ commit }) {
+      commit("setLoading", true);
+      try {
+        await ShopService.postOrder();
+        commit("setLoading", false);
+        commit("setSuccess", true);
+      } catch (err) {
+        console.log(err);
+        commit("setSuccess", false);
+        commit("setLoading", false);
+      }
+    },
+    async getOrders({ commit }) {
+      commit("setLoading", true);
+      try {
+        const orders = (await ShopService.getOrders()).data;
+        commit("setOrders", orders);
         commit("setLoading", false);
       } catch (err) {
         console.log(err);
