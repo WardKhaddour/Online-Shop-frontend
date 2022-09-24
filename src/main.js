@@ -7,6 +7,7 @@ import store from "./store";
 import "@/assets/css/main.css";
 import "@/assets/css/forms.css";
 import "@/assets/css/products.css";
+import "@/assets/css/cart.css";
 
 Vue.config.productionTip = false;
 /* eslint-disable no-new */
