@@ -2,10 +2,17 @@
   <div v-if="!loading">
     <main v-if="cart.length">
       <ul class="cart__item-list">
-        <li class="cart__item" v-for="product in cart" :key="product.id">
-          <h1>{{ product.title }}</h1>
+        <li
+          class="cart__item"
+          v-for="product in cart"
+          :key="product.productId._id"
+        >
+          <h1>{{ product.productId.title }}</h1>
           <h2>Quantity: {{ product.quantity }}</h2>
-          <button class="btn danger" @click="removeFromCart(product._id)">
+          <button
+            class="btn danger"
+            @click="removeFromCart(product.productId._id)"
+          >
             Delete
           </button>
         </li>

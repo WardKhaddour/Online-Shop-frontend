@@ -28,7 +28,7 @@ export default {
   methods: {
     ...mapActions("Shop", ["getProductById", "addToCart"]),
     async addProductToCart() {
-      await this.addToCart(this.product.id);
+      await this.addToCart(this.product._id);
     }
   },
   async created() {
