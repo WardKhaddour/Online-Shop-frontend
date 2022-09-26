@@ -4,6 +4,8 @@ import Error404Layout from "@/layouts/404";
 import MainLayout from "@/layouts/MainLayout";
 import ShopModuleRoutes from "@/modules/shop/routes";
 import AdminModuleRoutes from "@/modules/admin/routes";
+import AuthModuleRoutes from "@/modules/auth/routes";
+
 Vue.use(Router);
 
 const router = new Router({
@@ -13,6 +15,11 @@ const router = new Router({
       path: "/",
       component: MainLayout,
       children: [ShopModuleRoutes]
+    },
+    {
+      path: "/",
+      component: MainLayout,
+      children: [AuthModuleRoutes]
     },
     {
       path: "/admin",

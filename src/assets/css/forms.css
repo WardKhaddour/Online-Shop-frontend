@@ -2,7 +2,12 @@
   margin: 1rem 0;
 }
 
-.form-control label,
+.form-control label {
+  display: block;
+  width: fit-content;
+  margin-bottom: 0.25rem;
+}
+
 .form-control input,
 .form-control textarea {
   display: block;

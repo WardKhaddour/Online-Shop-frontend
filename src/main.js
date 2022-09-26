@@ -9,6 +9,7 @@ import "@/assets/css/forms.css";
 import "@/assets/css/products.css";
 import "@/assets/css/cart.css";
 import "@/assets/css/orders.css";
+import "@/assets/css/auth.css";
 
 Vue.config.productionTip = false;
 /* eslint-disable no-new */

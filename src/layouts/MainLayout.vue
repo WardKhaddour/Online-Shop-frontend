@@ -17,6 +17,21 @@
             >
           </li>
         </ul>
+        <ul class="main-header__item-list">
+          <li
+            class="main-header__item"
+            v-for="item in authItems"
+            :key="item.label"
+          >
+            <router-link
+              :class="{
+                active: currentPage === item.label
+              }"
+              :to="item.link"
+              >{{ item.label }}</router-link
+            >
+          </li>
+        </ul>
       </nav>
     </header>
     <router-view />
@@ -46,14 +61,20 @@ export default {
         {
           label: "Orders",
           link: "/orders"
-        },
+        }
+        // {
+        //   label: "Add Product",
+        //   link: "/admin/add-product"
+        // },
+        // {
+        //   label: "Admin Products",
+        //   link: "/admin/products"
+        // }
+      ],
+      authItems: [
         {
-          label: "Add Product",
-          link: "/admin/add-product"
-        },
-        {
-          label: "Admin Products",
-          link: "/admin/products"
+          label: "Login",
+          link: "/login"
         }
       ],
       currentPage: "Shop"
