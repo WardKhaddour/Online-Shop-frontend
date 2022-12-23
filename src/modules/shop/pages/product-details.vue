@@ -8,7 +8,9 @@
       </div>
       <h2>{{ product.price }}</h2>
       <p>{{ product.description }}</p>
-      <button class="btn" @click.prevent="addProductToCart">Add to Cart</button>
+      <button class="btn" @click.prevent="addProductToCart" v-if="isLoggedIn">
+        Add to Cart
+      </button>
     </main>
     <loading-spinner v-if="loading" class="loading-spinner"></loading-spinner>
   </div>
@@ -23,7 +25,9 @@ export default {
     loadingSpinner: RingLoader
   },
   computed: {
-    ...mapGetters("Shop", ["product", "loading"])
+    ...mapGetters("Shop", ["product", "loading"]),
+
+    ...mapGetters(["isLoggedIn"])
   },
   methods: {
     ...mapActions("Shop", ["getProductById", "addToCart"]),

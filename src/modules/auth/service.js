@@ -2,42 +2,14 @@ import { unauthenticatedAxiosInstance } from "@/utils/axios";
 import * as ep from "./endpoints";
 
 export default class Service {
-  static fetchProducts(qp = {}) {
+  static login(qp = {}) {
     return unauthenticatedAxiosInstance
-      .get(ep.PRODUCTS, qp)
+      .post(ep.LOGIN, qp)
       .then(res => res.data);
   }
-
-  static getProductById(id, qp = {}) {
+  static logout(qp = {}) {
     return unauthenticatedAxiosInstance
-      .get(ep.GET_PRODUCT(id), qp)
-      .then(res => res.data);
-  }
-
-  static addToCart(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .post(ep.ADD_TO_CART, qp)
-      .then(res => res.data);
-  }
-  static getCart(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .get(ep.GET_CART, qp)
-      .then(res => res.data);
-  }
-  static deleteFromCart(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .post(ep.DELETE_FROM_CART, qp)
-      .then(res => res.data);
-  }
-  static postOrder(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .post(ep.SEND_ORDER, qp)
-      .then(res => res.data);
-  }
-
-  static getOrders(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .get(ep.GET_ORDERS, qp)
+      .post(ep.LOGOUT, qp)
       .then(res => res.data);
   }
 }

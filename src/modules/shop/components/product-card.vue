@@ -13,7 +13,9 @@
       </div>
       <div class="card__actions">
         <button class="btn" @click="viewProductDetails">Details</button>
-        <button class="btn" @click="addProductToCart">Add to Cart</button>
+        <button class="btn" v-if="isLoggedIn" @click="addProductToCart">
+          Add to Cart
+        </button>
       </div>
     </article>
     <loading-spinner v-if="loading"></loading-spinner>
@@ -30,7 +32,8 @@ export default {
     loadingSpinner: RingLoader
   },
   computed: {
-    ...mapGetters("Shop", ["loading"])
+    ...mapGetters("Shop", ["loading"]),
+    ...mapGetters(["isLoggedIn"])
   },
   methods: {
     ...mapActions("Shop", ["addToCart"]),

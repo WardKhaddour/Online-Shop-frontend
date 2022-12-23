@@ -16,14 +16,14 @@
               >{{ item.label }}</router-link
             >
           </li>
-        </ul>
-        <ul class="main-header__item-list">
+
           <li
             class="main-header__item"
-            v-for="item in authItems"
+            v-for="item in loggedInUserItems"
             :key="item.label"
           >
             <router-link
+              v-if="isLoggedIn"
               :class="{
                 active: currentPage === item.label
               }"
@@ -32,17 +32,38 @@
             >
           </li>
         </ul>
+        <ul class="main-header__item-list">
+          <li class="main-header__item" v-if="!isLoggedIn">
+            <router-link
+              :class="{
+                active: currentPage === 'Logout'
+              }"
+              to="/login"
+              >Login</router-link
+            >
+          </li>
+          <li class="main-header__item" v-if="isLoggedIn">
+            <router-link @click.native="handleLogout" to="/"
+              >Logout</router-link
+            >
+          </li>
+        </ul>
       </nav>
     </header>
-    <router-view />
+    <router-view v-if="!loading" />
+    <loading-spinner class="loading-spinner" v-else></loading-spinner>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import RingLoader from "vue-spinner/src/RingLoader";
 
 export default {
   name: "MainLayout",
+  components: {
+    loadingSpinner: RingLoader
+  },
   data() {
     return {
       navItems: [
@@ -53,7 +74,9 @@ export default {
         {
           label: "Products",
           link: "/products"
-        },
+        }
+      ],
+      loggedInUserItems: [
         {
           label: "Cart",
           link: "/cart"
@@ -61,20 +84,21 @@ export default {
         {
           label: "Orders",
           link: "/orders"
+        },
+        {
+          label: "Add Product",
+          link: "/admin/add-product"
+        },
+        {
+          label: "Admin Products",
+          link: "/admin/products"
         }
-        // {
-        //   label: "Add Product",
-        //   link: "/admin/add-product"
-        // },
-        // {
-        //   label: "Admin Products",
-        //   link: "/admin/products"
-        // }
       ],
       authItems: [
         {
-          label: "Login",
-          link: "/login"
+          label: "Logout",
+          action: this.logout,
+          link: "/"
         }
       ],
       currentPage: "Shop"
@@ -82,6 +106,10 @@ export default {
   },
   created() {
     this.setActiveItem();
+  },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
+    ...mapGetters("Auth", ["loading"])
   },
   watch: {
     $route: {
@@ -91,6 +119,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions("Auth", ["logout"]),
+    ...mapActions(["setLogin"]),
+    async handleLogout() {
+      await this.logout();
+      this.setLogin(false);
+    },
     setActiveItem() {
       this.currentPage = this.$route.name;
     }
