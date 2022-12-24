@@ -3,49 +3,31 @@
     <header class="main-header">
       <nav class="main-header__nav">
         <ul class="main-header__item-list">
-          <li
-            class="main-header__item"
-            v-for="item in navItems"
-            :key="item.label"
-          >
-            <router-link
-              :class="{
-                active: currentPage === item.label
-              }"
-              :to="item.link"
-              >{{ item.label }}</router-link
-            >
+          <li class="main-header__item" v-for="item in navItems" :key="item.label">
+            <router-link :class="{
+              active: currentPage === item.label
+            }" :to="item.link">{{ item.label }}</router-link>
           </li>
 
-          <li
-            class="main-header__item"
-            v-for="item in loggedInUserItems"
-            :key="item.label"
-          >
-            <router-link
-              v-if="isLoggedIn"
-              :class="{
-                active: currentPage === item.label
-              }"
-              :to="item.link"
-              >{{ item.label }}</router-link
-            >
+          <li class="main-header__item" v-for="item in loggedInUserItems" :key="item.label">
+            <router-link v-if="isLoggedIn" :class="{
+              active: currentPage === item.label
+            }" :to="item.link">{{ item.label }}</router-link>
           </li>
         </ul>
         <ul class="main-header__item-list">
           <li class="main-header__item" v-if="!isLoggedIn">
-            <router-link
-              :class="{
-                active: currentPage === 'Logout'
-              }"
-              to="/login"
-              >Login</router-link
-            >
+            <router-link :class="{
+              active: currentPage === 'Logout'
+            }" to="/login">Login</router-link>
+          </li>
+          <li class="main-header__item" v-if="!isLoggedIn">
+            <router-link :class="{
+              active: currentPage === 'Logout'
+            }" to="/signup">Signup</router-link>
           </li>
           <li class="main-header__item" v-if="isLoggedIn">
-            <router-link @click.native="handleLogout" to="/"
-              >Logout</router-link
-            >
+            <router-link @click.native="handleLogout" to="/">Logout</router-link>
           </li>
         </ul>
       </nav>

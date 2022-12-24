@@ -7,6 +7,11 @@ export default class Service {
       .post(ep.LOGIN, qp)
       .then(res => res.data);
   }
+  static signup(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .post(ep.SIGNUP, qp)
+      .then(res => res.data);
+  }
   static logout(qp = {}) {
     return unauthenticatedAxiosInstance
       .post(ep.LOGOUT, qp)

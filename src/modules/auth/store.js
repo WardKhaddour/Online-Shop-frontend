@@ -27,6 +27,17 @@ export default {
         commit("setLoading", false);
       }
     },
+    async signup({ commit }, userData) {
+      commit("setLoading", true);
+      try {
+        const res = await AuthService.signup(userData);
+        console.log(res);
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
+    },
     async logout({ commit }) {
       commit("setLoading", true);
       try {

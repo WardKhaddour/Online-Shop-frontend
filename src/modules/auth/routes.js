@@ -10,6 +10,13 @@ export default {
       path: "login",
       component: () => import("./pages/login.vue"),
       meta: { title: "Login" }
+    },
+
+    {
+      name: "Signup",
+      path: "signup",
+      component: () => import("./pages/signup.vue"),
+      meta: { title: "Signup" }
     }
   ]
 };

@@ -24,4 +24,13 @@ unauthenticatedAxiosInstance.interceptors.request.use(
   }
 );
 
+unauthenticatedAxiosInstance.get("/api/getcsrftoken").then(
+  response => {
+    unauthenticatedAxiosInstance.defaults.headers.common["X-CSRF-TOKEN"] =
+      response.data.csrfToken;
+  },
+  err => {
+    console.log(err);
+  }
+);
 export { unauthenticatedAxiosInstance };
