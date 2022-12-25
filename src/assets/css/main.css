@@ -256,3 +256,11 @@ form {
 .link:hover {
   color: white;
 }
+
+.error-message {
+  display: inline-block;
+  background-color: rgb(218, 64, 64);
+  color: white;
+  font-size: 24px;
+  padding: 40px;
+}

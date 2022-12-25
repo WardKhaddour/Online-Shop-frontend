@@ -14,21 +14,32 @@ export default new Vuex.Store({
   namespaced: true,
   modules: { Shop, Admin, Auth },
   state: {
-    isLoggedIn: initLoginState() === "true"
+    isLoggedIn: initLoginState() === "true",
+    errorMessage: ""
   },
   getters: {
     isLoggedIn(state) {
       return state.isLoggedIn;
+    },
+    errorMessage(state) {
+      return state.errorMessage;
     }
   },
   mutations: {
     setLoggedIn(state, value) {
       state.isLoggedIn = value;
+    },
+    setError(state, value) {
+      state.errorMessage = value;
     }
   },
   actions: {
     setLogin({ commit }, value) {
       commit("setLoggedIn", value);
+    },
+
+    setErrorMessage({ commit }, value) {
+      commit("setError", value);
     }
   }
 });

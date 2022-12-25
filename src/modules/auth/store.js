@@ -25,6 +25,7 @@ export default {
       } catch (err) {
         console.log(err);
         commit("setLoading", false);
+        throw err;
       }
     },
     async signup({ commit }, userData) {
@@ -35,6 +36,7 @@ export default {
       } catch (err) {
         console.log(err);
         commit("setLoading", false);
+        throw err;
       }
     },
     async resetPassword({ commit }, userData) {
@@ -45,6 +47,7 @@ export default {
       } catch (err) {
         console.log(err);
         commit("setLoading", false);
+        throw err;
       }
     },
     async changePassword({ commit }, userData) {
@@ -55,6 +58,7 @@ export default {
       } catch (err) {
         console.log(err);
         commit("setLoading", false);
+        throw err;
       }
     },
     async checkPasswordToken({ commit }, token) {
@@ -65,6 +69,8 @@ export default {
         // commit("setLoading", false);
       } catch (err) {
         console.log(err);
+        throw err;
+
         // commit("setLoading", false);
       }
     },
@@ -78,6 +84,7 @@ export default {
       } catch (err) {
         console.log(err);
         commit("setLoading", false);
+        throw err;
       }
     },
     async logout({ commit }) {
@@ -88,6 +95,7 @@ export default {
       } catch (err) {
         console.log(err);
         commit("setLoading", false);
+        throw err;
       }
     }
   }

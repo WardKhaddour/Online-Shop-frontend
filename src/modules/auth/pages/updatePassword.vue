@@ -4,7 +4,12 @@
       <form class="login-form" @submit.prevent="handleSubmit">
         <div class="form-control">
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" v-model="userData.newPassword" />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            v-model="userData.newPassword"
+          />
         </div>
         <button class="btn" type="submit">
           Update Password
@@ -24,6 +29,9 @@ export default {
         newPassword: "",
         passwordToken: "",
         userId: ""
+      },
+      validate: {
+        validPassword: true
       }
     };
   },
@@ -38,7 +46,6 @@ export default {
         this.$destroy();
         this.$router.push("/reset");
       } else {
-        console.log("aaaaaaa");
         this.userData.passwordToken = res.data.passwordToken;
         this.userData.userId = res.data.userId;
       }
@@ -48,14 +55,23 @@ export default {
   },
   methods: {
     ...mapActions("Auth", ["checkPasswordToken", "updatePassword"]),
+    ...mapActions(["setErrorMessage"]),
 
     async handleSubmit() {
+      if (this.userData.newPassword.length < 5) {
+        this.setErrorMessage("Password should be at least 5 characters");
+        return;
+      }
+      this.setErrorMessage("");
       await this.updatePassword(this.userData);
       this.$router.push("/login");
       // await this.login(this.userData);
       // this.userData.password = "";
       // this.$router.push("/");
     }
+  },
+  beforeDestroy() {
+    this.setErrorMessage("");
   },
   computed: {
     ...mapGetters("Auth", ["loading"])
