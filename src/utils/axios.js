@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import router from "../router";
 // const axiosInstance = axios.create({
 //   baseURL: process.env.BASE_URL + "api/",
 //   headers: {
@@ -33,4 +33,16 @@ unauthenticatedAxiosInstance.get("/api/getcsrftoken").then(
     console.log(err);
   }
 );
+
+unauthenticatedAxiosInstance.interceptors.response.use(
+  response => {},
+  err => {
+    if (err.request.status === 500) {
+      console.log(5);
+      router.push("/500");
+      return Promise.reject(err);
+    }
+  }
+);
+
 export { unauthenticatedAxiosInstance };

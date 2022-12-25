@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Error404Layout from "@/layouts/404";
+import Error500Layout from "@/layouts/500";
 import MainLayout from "@/layouts/MainLayout";
 import ShopModuleRoutes from "@/modules/shop/routes";
 import AdminModuleRoutes from "@/modules/admin/routes";
@@ -25,6 +26,10 @@ const router = new Router({
       path: "/admin",
       component: MainLayout,
       children: [AdminModuleRoutes]
+    },
+    {
+      path: "/500",
+      component: Error500Layout
     },
     {
       path: "*",
