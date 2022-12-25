@@ -4,16 +4,9 @@
       <label for="email">E-Mail</label>
       <input type="email" name="email" id="email" v-model="userData.email" />
     </div>
-    <div class="form-control">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" v-model="userData.password" />
-    </div>
-    <div class="form-control">
-      <label for="confirmPassword">Confirm Password</label>
-      <input type="password" name="confirmPassword" id="confirmPassword" v-model="userData.confirmPassword" />
-    </div>
+
     <button class="btn" type="submit">
-      Signup
+      Reset password
     </button>
   </form>
   <loading-spinner class="loading-spinner" v-else></loading-spinner>
@@ -28,8 +21,7 @@ export default {
     return {
       userData: {
         email: "",
-        password: "",
-        confirmPassword: '',
+
       }
     };
   },
@@ -37,15 +29,13 @@ export default {
     loadingSpinner: RingLoader
   },
   methods: {
-    ...mapActions("Auth", ["signup"]),
+    ...mapActions("Auth", ["resetPassword"]),
     ...mapActions(["setLogin"]),
     async handleSubmit() {
-      await this.signup(this.userData);
+      await this.resetPassword(this.userData);
       this.userData.email = "";
-      this.userData.password = "";
-      this.userData.confirmPassword = "";
+
       this.$router.push("/");
-      this.setLogin(true);
     }
   },
   computed: {

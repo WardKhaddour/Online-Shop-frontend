@@ -12,6 +12,26 @@ export default class Service {
       .post(ep.SIGNUP, qp)
       .then(res => res.data);
   }
+  static resetPassword(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .post(ep.RESET_PASSWORD, qp)
+      .then(res => res.data);
+  }
+  static changePassword(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .post(ep.CHANGE_PASSWORD, qp)
+      .then(res => res.data);
+  }
+  static checkPasswordToken(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .get(ep.CHECK_PASSWORD_TOKEN(qp))
+      .then(res => res);
+  }
+  static updatePassword(qp = {}) {
+    return unauthenticatedAxiosInstance
+      .post(ep.UPDATE_PASSWORD, qp)
+      .then(res => res);
+  }
   static logout(qp = {}) {
     return unauthenticatedAxiosInstance
       .post(ep.LOGOUT, qp)

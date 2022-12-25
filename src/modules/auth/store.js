@@ -31,6 +31,48 @@ export default {
       commit("setLoading", true);
       try {
         const res = await AuthService.signup(userData);
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
+    },
+    async resetPassword({ commit }, userData) {
+      commit("setLoading", true);
+      try {
+        await AuthService.resetPassword(userData);
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
+    },
+    async changePassword({ commit }, userData) {
+      commit("setLoading", true);
+      try {
+        await AuthService.changePassword(userData);
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
+    },
+    async checkPasswordToken({ commit }, token) {
+      // commit("setLoading", true);
+      try {
+        const res = await AuthService.checkPasswordToken(token);
+        return res;
+        // commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        // commit("setLoading", false);
+      }
+    },
+    async updatePassword({ commit }, userData) {
+      commit("setLoading", true);
+      try {
+        const res = await AuthService.updatePassword(userData);
+        console.log(userData);
         console.log(res);
         commit("setLoading", false);
       } catch (err) {

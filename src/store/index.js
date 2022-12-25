@@ -7,7 +7,6 @@ import Auth from "@/modules/auth/store.js";
 Vue.use(Vuex);
 
 function initLoginState() {
-  console.log("ss", document.cookie.split("=")[1]);
   return document.cookie.split("=")[1];
 }
 initLoginState();
