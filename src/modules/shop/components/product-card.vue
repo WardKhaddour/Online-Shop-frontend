@@ -5,7 +5,7 @@
         <h1 class="product__title">{{ product.title }}</h1>
       </header>
       <div class="card__image">
-        <img :src="product.imageUrl" :alt="product.title" />
+        <img :src="getImage(product.imageUrl)" :alt="product.title" />
       </div>
       <div class="card__content">
         <h2 class="product__price">{{ product.price }}</h2>
@@ -25,6 +25,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import RingLoader from "vue-spinner/src/RingLoader.vue";
+import getImage from "../../../utils/getImage";
 
 export default {
   props: { product: { type: Object, required: true } },
@@ -37,6 +38,7 @@ export default {
   },
   methods: {
     ...mapActions("Shop", ["addToCart"]),
+    getImage,
     async addProductToCart() {
       await this.addToCart(this.product._id);
       this.$router.push("/cart");

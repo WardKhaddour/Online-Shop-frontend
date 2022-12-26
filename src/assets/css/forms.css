@@ -31,3 +31,12 @@
 .form-control textarea.invalid {
   border: 3px solid red;
 }
+
+.form-control .product-image {
+  width: 70px;
+  height: 70px;
+}
+.form-control .product-image img {
+  width: 100%;
+  height: 100%;
+}

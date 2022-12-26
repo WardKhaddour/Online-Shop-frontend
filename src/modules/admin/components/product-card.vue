@@ -4,7 +4,7 @@
       <h1 class="product__title">{{ product.title }}</h1>
     </header>
     <div class="card__image">
-      <img :src="product.imageUrl" :alt="product.title" />
+      <img :src="getImage(product.image)" :alt="product.title" />
     </div>
     <div class="card__content">
       <h2 class="product__price">{{ product.price }}</h2>
@@ -26,11 +26,13 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import getImage from "../../../utils/getImage";
 
 export default {
   props: { product: { type: Object, required: true } },
   methods: {
     ...mapActions("Admin", ["deleteProduct"]),
+    getImage,
     async deleteProd() {
       await this.deleteProduct(this.product._id);
     }

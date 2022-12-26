@@ -9,7 +9,11 @@ export default class Service {
   }
   static postProduct(qp = {}) {
     return unauthenticatedAxiosInstance
-      .post(ep.POST_PRODUCT, qp)
+      .post(ep.POST_PRODUCT, qp, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      })
       .then(res => res.data);
   }
 

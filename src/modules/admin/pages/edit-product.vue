@@ -7,8 +7,11 @@
           <input type="text" name="title" id="title" v-model="title" />
         </div>
         <div class="form-control">
-          <label for="imageUrl">Image URL</label>
-          <input type="text" name="imageUrl" id="imageUrl" v-model="imageUrl" />
+          <div class="product-image">
+            <img :src="imagePath" alt="Product Image" />
+          </div>
+          <label for="image">Image</label>
+          <input type="file" name="image" id="image" @change="onImageUpload" />
         </div>
         <div class="form-control">
           <label for="price">Price</label>
@@ -52,7 +55,8 @@ export default {
   data() {
     return {
       title: "",
-      imageUrl: "",
+      image: null,
+      imagePath: "",
       price: "",
       description: "",
       buttonLabel: "Add Product"
@@ -62,7 +66,7 @@ export default {
     if (this.product) {
       this.id = this.product._id;
       this.title = this.product.title;
-      this.imageUrl = this.product.imageUrl;
+      this.image = this.product.image;
       this.price = this.product.price;
       this.description = this.product.description;
       this.buttonLabel = "Update Product";
@@ -78,26 +82,39 @@ export default {
   },
   methods: {
     ...mapActions("Admin", ["postProduct", "editProduct"]),
+    onImageUpload(e) {
+      const files = e.target.files || e.dataTransfer.files;
+      if (!files.length) {
+        return;
+      }
+      this.image = files[0];
+      this.createImage(files[0]);
+    },
+    createImage(file) {
+      const reader = new FileReader();
+      const vm = this;
+
+      reader.onload = e => {
+        vm.imagePath = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
     async submitHandler() {
+      const formData = new FormData();
+      formData.append("id", this.id);
+      formData.append("title", this.title);
+      formData.append("image", this.image);
+      formData.append("price", this.price);
+      formData.append("description", this.description);
+
       if (this.product) {
-        await this.editProduct({
-          id: this.id,
-          title: this.title,
-          imageUrl: this.imageUrl,
-          price: this.price,
-          description: this.description
-        });
+        await this.editProduct(formData);
       } else {
-        await this.postProduct({
-          title: this.title,
-          imageUrl: this.imageUrl,
-          price: this.price,
-          description: this.description
-        });
+        await this.postProduct(formData);
       }
       if (this.success) {
         this.title = "";
-        this.imageUrl = "";
+        this.image = null;
         this.price = "";
         this.description = "";
         this.$router.push("/shop");
