@@ -3,15 +3,17 @@
     <main v-if="orders.length">
       <ul class="orders">
         <li class="orders__item" v-for="order in orders" :key="order._id">
-          <h1>Order- # {{ order._id }}</h1>
+          <h1>
+            Order- # {{ order._id }}-
+            <button @click="invoice(order._id)">Invoice</button>
+          </h1>
           <ul class="orders__products">
             <li
               class="orders__products-item"
               v-for="product in order.products"
               :key="product._id"
             >
-              {{ product.product.title }} ({{ product.quantity }}) -
-              <button @click="invoice(order._id)">Invoice</button>
+              {{ product.product.title }} ({{ product.quantity }})
             </li>
           </ul>
         </li>
