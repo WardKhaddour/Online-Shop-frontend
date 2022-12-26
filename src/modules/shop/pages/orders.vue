@@ -10,7 +10,8 @@
               v-for="product in order.products"
               :key="product._id"
             >
-              {{ product.product.title }} ({{ product.quantity }})
+              {{ product.product.title }} ({{ product.quantity }}) -
+              <button @click="invoice(order._id)">Invoice</button>
             </li>
           </ul>
         </li>
@@ -33,7 +34,7 @@ export default {
     ...mapGetters("Shop", ["orders", "loading", "success"])
   },
   methods: {
-    ...mapActions("Shop", ["getOrders"])
+    ...mapActions("Shop", ["getOrders", "invoice"])
   },
   async created() {
     await this.getOrders();

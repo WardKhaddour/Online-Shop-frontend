@@ -127,6 +127,17 @@ export default {
         console.log(err);
         commit("setLoading", false);
       }
+    },
+
+    async invoice({ commit }, orderId) {
+      commit("setLoading", true);
+      try {
+        const data = await ShopService.invoice(orderId);
+        commit("setLoading", false);
+      } catch (err) {
+        console.log(err);
+        commit("setLoading", false);
+      }
     }
   }
 };

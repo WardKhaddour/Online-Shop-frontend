@@ -40,4 +40,20 @@ export default class Service {
       .get(ep.GET_ORDERS, qp)
       .then(res => res.data);
   }
+
+  static invoice(orderId) {
+    return unauthenticatedAxiosInstance({
+      method: "GET",
+      url: ep.INVOICE(orderId),
+      responseType: "arraybuffer"
+    }).then(res => {
+      const blob = new Blob([res.data], {
+        type: "application/pdf"
+      });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `invoice-${orderId}`;
+      link.click();
+    });
+  }
 }

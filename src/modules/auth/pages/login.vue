@@ -78,7 +78,7 @@ export default {
         this.$router.push("/");
         this.setLogin(true);
       } catch (err) {
-        this.setErrorMessage(err.response.data.message);
+        this.setErrorMessage(err);
       }
     }
   },
