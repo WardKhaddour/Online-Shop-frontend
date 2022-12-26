@@ -35,7 +35,7 @@ unauthenticatedAxiosInstance.get("/api/getcsrftoken").then(
 );
 
 unauthenticatedAxiosInstance.interceptors.response.use(
-  response => {},
+  response => response,
   err => {
     if (err.request.status === 500) {
       console.log(5);
