@@ -38,7 +38,6 @@ unauthenticatedAxiosInstance.interceptors.response.use(
   response => response,
   err => {
     if (err.request.status === 500) {
-      console.log(5);
       router.push("/500");
       return Promise.reject(err);
     }

@@ -67,10 +67,10 @@ export default {
       }
     },
 
-    async deleteProduct({ commit, dispatch }, id) {
+    async deleteProduct({ commit, dispatch }, productId) {
       commit("setLoading", true);
       try {
-        await AdminService.deleteProduct({ id });
+        await AdminService.deleteProduct(productId);
         commit("setLoading", false);
         commit("setSuccessStatus", true);
         dispatch("fetchAdminProducts");

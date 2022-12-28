@@ -76,7 +76,6 @@ export default {
       commit("setLoading", true);
       try {
         const productsData = (await ShopService.fetchProducts(page)).data;
-        console.log(productsData.products);
         commit("setProducts", productsData.products);
         commit("setProductsCount", productsData.productsCount);
         commit("setCurrentPage", productsData.currentPage);
@@ -119,10 +118,10 @@ export default {
         commit("setLoading", false);
       }
     },
-    async removeFromCart({ commit, dispatch }, id) {
+    async removeFromCart({ commit, dispatch }, productId) {
       commit("setLoading", true);
       try {
-        await ShopService.deleteFromCart({ id });
+        await ShopService.deleteFromCart(productId);
         dispatch("getCart");
         commit("setLoading", false);
       } catch (err) {

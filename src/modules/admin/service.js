@@ -19,13 +19,11 @@ export default class Service {
 
   static editProduct(qp = {}) {
     return unauthenticatedAxiosInstance
-      .post(ep.EDIT_PRODUCT, qp)
+      .patch(ep.EDIT_PRODUCT, qp)
       .then(res => res.data);
   }
 
-  static deleteProduct(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .post(ep.DELETE_PRODUCT, qp)
-      .then(res => res.data);
+  static deleteProduct(productId) {
+    return unauthenticatedAxiosInstance.delete(ep.DELETE_PRODUCT(productId));
   }
 }

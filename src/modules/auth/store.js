@@ -20,7 +20,6 @@ export default {
       commit("setLoading", true);
       try {
         const res = await AuthService.login(userData);
-        console.log(res);
         commit("setLoading", false);
       } catch (err) {
         console.log(err);
@@ -78,8 +77,6 @@ export default {
       commit("setLoading", true);
       try {
         const res = await AuthService.updatePassword(userData);
-        console.log(userData);
-        console.log(res);
         commit("setLoading", false);
       } catch (err) {
         console.log(err);
