@@ -5,6 +5,9 @@ export default {
   state: {
     products: [],
     product: {},
+    productsCount: 0,
+    currentPage: 1,
+    pages: 0,
     cart: [],
     orders: [],
     loading: true,
@@ -19,6 +22,15 @@ export default {
     },
     product(state) {
       return state.product;
+    },
+    productsCount(state) {
+      return state.productsCount;
+    },
+    pages(state) {
+      return state.pages;
+    },
+    currentPage(state) {
+      return state.currentPage;
     },
     cart(state) {
       return state.cart;
@@ -40,6 +52,15 @@ export default {
     setProduct(state, value) {
       state.product = value;
     },
+    setProductsCount(state, value) {
+      state.productsCount = value;
+    },
+    setPages(state, value) {
+      state.pages = value;
+    },
+    setCurrentPage(state, value) {
+      state.currentPage = value;
+    },
     setCart(state, value) {
       state.cart = value;
     },
@@ -51,11 +72,15 @@ export default {
     }
   },
   actions: {
-    async fetchProducts({ commit }) {
+    async fetchProducts({ commit }, page) {
       commit("setLoading", true);
       try {
-        const products = (await ShopService.fetchProducts()).data;
-        commit("setProducts", products);
+        const productsData = (await ShopService.fetchProducts(page)).data;
+        console.log(productsData.products);
+        commit("setProducts", productsData.products);
+        commit("setProductsCount", productsData.productsCount);
+        commit("setCurrentPage", productsData.currentPage);
+        commit("setPages", productsData.lastPage);
         commit("setLoading", false);
       } catch (err) {
         console.log(err);

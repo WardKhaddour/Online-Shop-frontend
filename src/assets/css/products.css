@@ -25,3 +25,10 @@
 .product__description {
   text-align: center;
 }
+
+.active {
+  background-color: #00695c;
+  padding: 2px;
+  color: white;
+  margin: 2px;
+}

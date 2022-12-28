@@ -2,9 +2,9 @@ import { unauthenticatedAxiosInstance } from "@/utils/axios";
 import * as ep from "./endpoints";
 
 export default class Service {
-  static fetchProducts(qp = {}) {
+  static fetchProducts(page) {
     return unauthenticatedAxiosInstance
-      .get(ep.PRODUCTS, qp)
+      .get(ep.PRODUCTS(page))
       .then(res => res.data);
   }
 

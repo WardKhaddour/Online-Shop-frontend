@@ -8,7 +8,12 @@
           :product="product"
         ></product-card>
       </div>
-
+      <section class="pagination">
+        <button v-if="currentPage !== 1" @click="getPage(0)">&lt;</button>
+        <button v-if="currentPage !== pages" @click="getPage(1)">&gt;</button>
+        <span class="active">{{ currentPage }} </span>
+        <span> - {{ pages }} </span>
+      </section>
       <h1 v-if="!products || products.length === 0">No Products Found!</h1>
     </main>
     <loading-spinner v-if="loading" class="loading-spinner"></loading-spinner>
@@ -29,10 +34,14 @@ export default {
     loadingSpinner: RingLoader
   },
   methods: {
-    ...mapActions("Shop", ["fetchProducts"])
+    ...mapActions("Shop", ["fetchProducts"]),
+    async getPage(next) {
+      if (next) await this.fetchProducts(this.currentPage + 1);
+      else await this.fetchProducts(this.currentPage - 1);
+    }
   },
   computed: {
-    ...mapGetters("Shop", ["products", "loading"])
+    ...mapGetters("Shop", ["products", "pages", "currentPage", "loading"])
   }
 };
 </script>
