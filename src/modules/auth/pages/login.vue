@@ -26,8 +26,10 @@
       <button class="btn" type="submit">
         Login
       </button>
+      <router-link to="/reset" class="login-form__reset-password link"
+        >Reset Password</router-link
+      >
     </form>
-    <router-link to="/reset" class="centered">Reset Password</router-link>
   </div>
   <loading-spinner class="loading-spinner" v-else></loading-spinner>
 </template>
@@ -90,3 +92,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.login-form__reset-password {
+  align-self: flex-end;
+}
+</style>

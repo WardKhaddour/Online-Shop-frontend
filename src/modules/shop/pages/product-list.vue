@@ -8,7 +8,7 @@
           :product="product"
         ></product-card>
       </div>
-      <section class="pagination">
+      <section class="pagination" v-if="products.length !== 0">
         <button v-if="currentPage !== 1" @click="getPage(0)">&lt;</button>
         <button v-if="currentPage !== pages" @click="getPage(1)">&gt;</button>
         <span class="active">{{ currentPage }} </span>
