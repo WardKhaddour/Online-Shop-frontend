@@ -123,3 +123,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.product-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+</style>

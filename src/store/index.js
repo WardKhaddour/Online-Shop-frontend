@@ -7,14 +7,14 @@ import Auth from "@/modules/auth/store.js";
 Vue.use(Vuex);
 
 function initLoginState() {
-  return document.cookie.split("=")[1];
+  return localStorage.getItem("token") && localStorage.getItem("user");
 }
-initLoginState();
+
 export default new Vuex.Store({
   namespaced: true,
   modules: { Shop, Admin, Auth },
   state: {
-    isLoggedIn: initLoginState() === "true",
+    isLoggedIn: initLoginState(),
     errorMessage: ""
   },
   getters: {

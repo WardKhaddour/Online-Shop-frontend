@@ -41,12 +41,7 @@ export default {
 </script>
 
 <style>
-.product-form {
-  width: 20rem;
-  max-width: 90%;
-  margin: auto;
-  display: block;
-}
+
 
 .product-item {
   width: 20rem;

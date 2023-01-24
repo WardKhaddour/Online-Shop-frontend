@@ -1,4 +1,4 @@
-import { unauthenticatedAxiosInstance } from "@/utils/axios";
+import { unauthenticatedAxiosInstance, axiosInstance } from "@/utils/axios";
 import * as ep from "./endpoints";
 
 export default class Service {
@@ -15,34 +15,26 @@ export default class Service {
   }
 
   static addToCart(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .post(ep.ADD_TO_CART, qp)
-      .then(res => res.data);
+    return axiosInstance.post(ep.ADD_TO_CART, qp).then(res => res.data);
   }
   static getCart(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .get(ep.GET_CART, qp)
-      .then(res => res.data);
+    return axiosInstance.get(ep.GET_CART, qp).then(res => res.data);
   }
   static deleteFromCart(productId) {
-    return unauthenticatedAxiosInstance
+    return axiosInstance
       .delete(ep.DELETE_FROM_CART(productId))
       .then(res => res.data);
   }
   static postOrder(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .post(ep.SEND_ORDER, qp)
-      .then(res => res.data);
+    return axiosInstance.post(ep.SEND_ORDER, qp).then(res => res.data);
   }
 
   static getOrders(qp = {}) {
-    return unauthenticatedAxiosInstance
-      .get(ep.GET_ORDERS, qp)
-      .then(res => res.data);
+    return axiosInstance.get(ep.GET_ORDERS, qp).then(res => res.data);
   }
 
   static invoice(orderId) {
-    return unauthenticatedAxiosInstance({
+    return axiosInstance({
       method: "GET",
       url: ep.INVOICE(orderId),
       responseType: "arraybuffer"
